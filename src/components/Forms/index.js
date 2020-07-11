@@ -1,16 +1,5 @@
 import React, { useRef, useState } from 'react';
 
-function Forms(props) {
-    return (
-        <div>
-            <HTMLForms />
-            <br />
-            <div className="divider"></div>
-            <ReactForm />
-        </div>
-    );
-}
-
 export function HTMLForms(props) {
 
     const inputRef = useRef(null);
@@ -108,5 +97,3 @@ export function ReactForm() {
         </div>
     )
 }
-
-export default Forms;
