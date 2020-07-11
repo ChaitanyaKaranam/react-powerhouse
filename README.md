@@ -1,2 +1,2 @@
-# react-powerhouse
-Snippets to create powerful react components
+# React Powerhouse
+> React snippets to create powerful React components
