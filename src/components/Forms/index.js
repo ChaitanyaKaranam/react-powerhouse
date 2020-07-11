@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export function HTMLForms(props) {
 
@@ -90,6 +91,57 @@ export function ReactForm() {
                         placeholder="Email Address" 
                         required 
                         onChange={e => handleChange('email', e.target.value)}/>
+                    <button type="submit" className="btn">Save</button>
+                </form>
+
+            </div>
+        </div>
+    )
+}
+
+export function HookForm(props) {
+
+    const { register, handleSubmit, errors, watch } = useForm({
+        defaultValues: {
+            firstname: 'test',
+            lastname: 'test',
+            email: 'test@123.com'
+        }
+    });
+
+    const watchFirstName = watch('firstname', '');
+
+    const submitData = data => {
+        console.log(data);
+    }
+
+    return (
+        <div>
+            <h4>Hook Forms</h4>
+            <br />
+            <div className="container">
+
+                <form onSubmit={handleSubmit(submitData)}>
+                    <input 
+                        ref={register({
+                            required: 'This is a required field'
+                        })}
+                    type="text" 
+                    name="firstname" 
+                    placeholder="First Name"/>
+
+                    { watchFirstName && watchFirstName === 'Admin' && <span>You cannot use this name</span>}
+
+                    <input 
+                        ref={register({
+                            required: 'This is a requied field'
+                        })} 
+                        type="text" 
+                        name="lastname" 
+                        placeholder="Last Name"/>
+
+
+                    <input ref={register({ required: 'This is a required field' })} type="email" name="email" placeholder="Email Address"/>
                     <button type="submit" className="btn">Save</button>
                 </form>
 
