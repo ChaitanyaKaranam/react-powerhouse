@@ -67,12 +67,12 @@ export function ReactForm() {
                 <input value={formData['email']} onChange={e => handleOnChange('email', e.target.value)} type="email" placeholder="Email" name="email" />
                 <button type="submit" className="btn">Save</button>
             </form> */}
-            <JobForm />
+            <UncontrolledJobForm />
         </div>
     )
 }
 
-function JobForm() {
+function UncontrolledJobForm() {
     return (
         <form>
             <section>
@@ -149,24 +149,6 @@ function JobForm() {
                     <br/>
                     <input type="file" id="cover_letter"/>
                 </div>
-                {/* <div className="file-field input-field">
-                    <div className="btn-small">
-                        <span>Upload Resume</span>
-                        <input type="file"/>
-                    </div>
-                    <div className="file-path-wrapper">
-                        <input className="file-path validate" type="text"/>
-                    </div>
-                </div>
-                <div className="file-field input-field">
-                    <div className="btn-small">
-                        <span>Upload Cover Letter</span>
-                        <input type="file"/>
-                    </div>
-                    <div className="file-path-wrapper">
-                        <input className="file-path validate" type="text"/>
-                    </div>
-                </div> */}
             </section>
             <br/><br/>
             <button type="submit" className="btn">Submit Form</button>
