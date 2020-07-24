@@ -1,151 +1,80 @@
 import React, { useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import UncontrolledJobForm from './UncontrolledJobForm';
+import ControlledJobForm from './ControlledJobForm';
+import FormikJobForm from './FormikJobForm';
+import HookJobForm from './HookJobForm';
 
 export function HTMLForms(props) {
 
-    const inputRef = useRef(null);
-    const lnRef = useRef(null);
-    const emRef = useRef(null);
+    const firstnameRef = useRef();
+    const lastnameRef = useRef();
+    const emailRef = useRef();
 
-    const handleSubmit = (e) => {
+    const [error, setError] = useState(false);
+
+    const handleSubmit = e => {
         e.preventDefault();
-        // const formData = new FormData(e.target);
-        // let newFormData = {};
-        // for(const [key, value] of formData.entries()){
-        //     newFormData[key] = value;
-        // }
-        // console.log(newFormData);
-
-        console.log(inputRef.current.value);
-        console.log(lnRef.current.value);
-        console.log(emRef.current.value);
-    }
-
-    console.log('html render');
-
-    return (
-        <div>
-            <h4>HTML Forms</h4>
-            <br />
-            <div className="container">
-
-                <form onSubmit={handleSubmit}>
-                    <input ref={inputRef} type="text" defaultValue="test" name="firstname" placeholder="First Name" required pattern="^((?!Admin).)*$"/>
-                    <input ref={lnRef} type="text" defaultValue="test" name="lastname" placeholder="Last Name" required />
-                    <input ref={emRef} type="email" defaultValue="test@test.com" name="email" placeholder="Email Address" required />
-                    <button type="submit" className="btn">Save</button>
-                </form>
-
-            </div>
-        </div>
-    )
-}
-
-export function ReactForm() {
-
-    const [formData, setFormData] = useState({
-        firstname: 'test',
-        lastname: 'test',
-        email: 'test@test.com'
-    })
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(formData);
-    }
-
-    const handleChange = (field, value) => {
-        let newFormData = { ...formData };
-        newFormData[field] = value;
-        setFormData(newFormData)
+        console.log({
+            firstname: firstnameRef.current.value,
+            lastname: lastnameRef.current.value,
+            email: emailRef.current.value,
+        });
     }
 
     console.log('render');
 
     return (
-        <div>
-            <h4>React Forms</h4>
-            <br />
-            <div className="container">
+        <div className="container">
+            <form onSubmit={handleSubmit}>
+                <input ref={firstnameRef} type="text" required={true} placeholder="FirstName" name="firstname" onChange={(e) => {
+                    if (e.target.value === 'Admin') {
+                        setError(true)
+                    } else {
+                        setError(false)
+                    }
+                }} />
+                {firstnameRef && firstnameRef.current && firstnameRef.current.value === 'Admin' ?
+                    <span>You cannot use this</span> : <></>}
 
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        value={formData['firstname']}
-                        name="firstname" 
-                        placeholder="First Name" 
-                        required 
-                        onChange={e => handleChange('firstname', e.target.value)}/>
-                    {formData['firstname'] === 'Admin' ? 'You cannot use this name' : ''}
-                    <input 
-                        type="text" 
-                        defaultValue="test" 
-                        name="lastname" 
-                        placeholder="Last Name" 
-                        required 
-                        onChange={e => handleChange('lastname', e.target.value)}/>
-                    <input 
-                        type="email" 
-                        defaultValue="test@test.com" 
-                        name="email" 
-                        placeholder="Email Address" 
-                        required 
-                        onChange={e => handleChange('email', e.target.value)}/>
-                    <button type="submit" className="btn">Save</button>
-                </form>
-
-            </div>
+                <input ref={lastnameRef} type="text" placeholder="LastName" name="lastname" />
+                <input ref={emailRef} type="email" placeholder="Email" name="email" />
+                <button type="submit" className="btn">Save</button>
+            </form>
         </div>
     )
 }
 
-export function HookForm(props) {
 
-    const { register, handleSubmit, errors, watch } = useForm({
-        defaultValues: {
-            firstname: 'test',
-            lastname: 'test',
-            email: 'test@123.com'
-        }
-    });
+export function ReactForm() {
 
-    const watchFirstName = watch('firstname', '');
+    let [formData, setFormData] = useState({
+        firstname: '',
+        lastname: '',
+        email: ''
+    })
 
-    const submitData = data => {
-        console.log(data);
+    const handleOnChange = (field, value) => {
+        let newFormData = { ...formData };
+        newFormData[field] = value;
+        setFormData(newFormData);
     }
 
+    console.log('render');
+
     return (
-        <div>
-            <h4>Hook Forms</h4>
-            <br />
-            <div className="container">
-
-                <form onSubmit={handleSubmit(submitData)}>
-                    <input 
-                        ref={register({
-                            required: 'This is a required field'
-                        })}
-                    type="text" 
-                    name="firstname" 
-                    placeholder="First Name"/>
-
-                    { watchFirstName && watchFirstName === 'Admin' && <span>You cannot use this name</span>}
-
-                    <input 
-                        ref={register({
-                            required: 'This is a requied field'
-                        })} 
-                        type="text" 
-                        name="lastname" 
-                        placeholder="Last Name"/>
-
-
-                    <input ref={register({ required: 'This is a required field' })} type="email" name="email" placeholder="Email Address"/>
-                    <button type="submit" className="btn">Save</button>
-                </form>
-
-            </div>
+        <div className="container">
+            {/* <form>
+                <input value={formData['firstname']} onChange={e => handleOnChange('firstname', e.target.value)} type="text" placeholder="FirstName" name="firstname" />
+                { formData['firstname'] === 'Admin' ? <span>You cannot use this</span> : <></>}
+                
+                <input value={formData['lastname']} onChange={e => handleOnChange('lastname', e.target.value)} type="text" placeholder="LastName" name="lastname" />
+                <input value={formData['email']} onChange={e => handleOnChange('email', e.target.value)} type="email" placeholder="Email" name="email" />
+                <button type="submit" className="btn">Save</button>
+            </form> */}
+            {/* <UncontrolledJobForm /> */}
+            {/* <ControlledJobForm/> */}
+            {/* <FormikJobForm/> */}
+            <HookJobForm/>
         </div>
     )
 }
