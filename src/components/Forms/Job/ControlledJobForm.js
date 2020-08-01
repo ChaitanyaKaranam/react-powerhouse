@@ -2,36 +2,32 @@ import React, { useState } from 'react';
 
 function ControlledJobForm(props) {
 
-    let [ formData, setFormData ] = useState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        phone: '',
-        location: '',
-        current_employer: '',
-        current_role: '',
-        role_description: '',
-        experience: 0,
-        skills: '',
-        portfolio_links: '',
-        social_media_links: ''
-    })
+    const [formData, setFormData] = useState({
+        'firstname': '',
+        'lastname': '',
+        'email': '',
+        'phone': '',
+        'location': '',
+        'current_employer': '',
+        'current_role': '',
+        'role_description': '',
+        'experience': 0,
+        'skills': ''
 
-    function handleOnSubmit(e){
-        e.preventDefault();
-        console.log(formData);
-    }
+    });
 
-    function handleOnChange(field, value){
+    const handleOnChange = (field, value) => {
         let newFormData = { ...formData };
         newFormData[field] = value;
         setFormData(newFormData);
     }
 
-    console.log('render');
-
     return (
-        <form onSubmit={handleOnSubmit}>
+        <form onSubmit={e => {
+            e.preventDefault();
+            console.log(formData);
+        }}>
+            {console.log('render')}
             <section>
                 <h4>Personal Information</h4>
                 <br />
@@ -42,25 +38,25 @@ function ControlledJobForm(props) {
                         type="text" 
                         id="firstname" 
                         name="firstname" 
-                        value={formData['firstname'] ? formData['firstname'] : ''} 
+                        value={formData['firstname']} 
                         onChange={e => handleOnChange('firstname', e.target.value)}
                     />
+                    { formData['firstname'] === 'Admin' ? <span>You cannot use this</span> : <></> }
                 </div>
-                { formData['firstname'] === 'Admin' ? <span className="red-text">Cannot use this value</span> : <></> }
                 <div>
                     <label htmlFor="lastname">Last Name</label>
                     <input
-                        required
+                        required 
                         type="text" 
                         id="lastname" 
                         name="lastname" 
                         value={formData['lastname']} 
-                        onChange={e => handleOnChange('lastname', e.target.value)}/>
+                        onChange={e => handleOnChange('lastname', e.target.value)}
+                    />
                 </div>
                 <div>
                     <label htmlFor="email">Email Address</label>
-                    <input
-                        required 
+                    <input 
                         type="email" 
                         id="email" 
                         name="email" 
@@ -69,24 +65,23 @@ function ControlledJobForm(props) {
                 </div>
                 <div>
                     <label htmlFor="phone">Phone Number</label>
-                    <input
-                        required
+                    <input 
                         type="tel" 
                         id="phone" 
-                        name="phone"
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        name="phone" 
                         value={formData['phone']} 
-                        onChange={e => handleOnChange('phone', e.target.value)}/>
+                        onChange={e => handleOnChange('phone', e.target.value)}
+                    />
                 </div>
                 <div>
                     <label htmlFor="location">Location</label>
-                    <input
-                        required
+                    <input 
                         type="text" 
                         id="location" 
-                        name="location" 
+                        name="location"
                         value={formData['location']} 
-                        onChange={e => handleOnChange('location', e.target.value)}/>
+                        onChange={e => handleOnChange('location', e.target.value)} 
+                    />
                 </div>
             </section>
             <section>
@@ -104,10 +99,10 @@ function ControlledJobForm(props) {
                 </div>
                 <div>
                     <label htmlFor="current_role">Current Role</label>
-                    <input
+                    <input 
                         type="text" 
                         id="current_role" 
-                        name="current_role" 
+                        name="current_role"
                         value={formData['current_role']} 
                         onChange={e => handleOnChange('current_role', e.target.value)}
                     />
@@ -117,7 +112,7 @@ function ControlledJobForm(props) {
                     <input 
                         type="text" 
                         id="role_description" 
-                        name="role_description" 
+                        name="role_description"
                         value={formData['role_description']} 
                         onChange={e => handleOnChange('role_description', e.target.value)}
                     />
@@ -130,14 +125,14 @@ function ControlledJobForm(props) {
                         name="experience" 
                         value={formData['experience']} 
                         onChange={e => handleOnChange('experience', e.target.value)}
-                    />
+                        />
                 </div>
                 <div>
                     <label htmlFor="skills">Skills</label>
                     <input 
                         type="text" 
                         id="skills" 
-                        name="skills" 
+                        name="skills"
                         value={formData['skills']} 
                         onChange={e => handleOnChange('skills', e.target.value)}
                     />
@@ -154,7 +149,9 @@ function ControlledJobForm(props) {
                             type="checkbox"
                             name="include_portfolio"
                             id="include_portfolio"
-                            onChange={e => handleOnChange('include_portfolio', e.target.checked)} />
+                            value={formData['include_portfolio']} 
+                            onChange={e => handleOnChange('include_portfolio', e.target.checked)}
+                        />
                         <span>Include Portfolio Links?</span>
                     </label>
                 </div>
@@ -166,16 +163,17 @@ function ControlledJobForm(props) {
                             type="checkbox"
                             name="include_social"
                             id="include_social"
-                            onChange={e => handleOnChange('include_social', e.target.checked)} />
+                            value={formData['include_social']} 
+                            onChange={e => handleOnChange('include_social', e.target.checked)}
+                        />
                         <span>Include Social Media Links?</span>
                     </label>
                 </div>
                 <br />
                 { formData['include_portfolio'] && <div>
                     <label htmlFor="portfolio_links">Portfolio links</label>
-                    <input
-                        required 
-                        type="url" 
+                    <input 
+                        type="text" 
                         id="portfolio_links" 
                         name="portfolio_links" 
                         value={formData['portfolio_links']} 
@@ -184,30 +182,29 @@ function ControlledJobForm(props) {
                 </div>}
                 { formData['include_social'] && <div>
                     <label htmlFor="social_media_links">Social Media Links</label>
-                    <input
-                        required 
-                        type="url" 
+                    <input 
+                        type="text" 
                         id="social_media_links" 
-                        name="social_media_links" 
+                        name="social_media_links"
                         value={formData['social_media_links']} 
                         onChange={e => handleOnChange('social_media_links', e.target.value)}
                     />
                 </div>}
+                
             </section>
             <section>
                 <h4>Uploads</h4>
                 <br />
-                <br />
                 <div>
                     <label htmlFor="resume">Select Resume</label>
-                    <br />
-                    <input type="file" id="resume" />
+                    <br/>
+                    <input type="file" id="resume"/>
                 </div>
-                <br /><br />
+                <br/><br/>
                 <div>
                     <label htmlFor="cover_letter">Select Cover Letter</label>
-                    <br />
-                    <input type="file" id="cover_letter" />
+                    <br/>
+                    <input type="file" id="cover_letter"/>
                 </div>
             </section>
             <br/><br/>

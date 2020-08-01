@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-function HookJobForm(props) {
+export function ReactForm() {
 
-    const { register, handleSubmit, errors, watch } = useForm();
+    const { register, handleSubmit, watch } = useForm();
 
-    const onSubmit = values => console.log(values);
+    const onSubmit = (values) => console.log(values);
 
     const watchValues = watch(['firstname', 'include_portfolio', 'include_social']);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            {console.log('render')}
             <section>
                 <h4>Personal Information</h4>
                 <br />
                 <div>
                     <label htmlFor="firstname">First Name</label>
-                    <input required ref={register} type="text" id="firstname" name="firstname" />
-                    { watchValues && watchValues['firstname'] === 'Admin' ? <span>You cannot use this</span> : <></>}
+                    <input ref={register} type="text" id="firstname" name="firstname" />
+                    {watchValues && watchValues['firstname'] === 'Admin' ? <span>You cannot use this</span> : <></>}
                 </div>
                 <div>
                     <label htmlFor="lastname">Last Name</label>
@@ -70,7 +71,7 @@ function HookJobForm(props) {
                             className="filled-in"
                             type="checkbox"
                             name="include_portfolio"
-                            id="include_portfolio"/>
+                            id="include_portfolio" />
                         <span>Include Portfolio Links?</span>
                     </label>
                 </div>
@@ -82,19 +83,20 @@ function HookJobForm(props) {
                             className="filled-in"
                             type="checkbox"
                             name="include_social"
-                            id="include_social"/>
+                            id="include_social" />
                         <span>Include Social Media Links?</span>
                     </label>
                 </div>
                 <br />
-                { watchValues && watchValues['include_portfolio'] && <div>
+                {watchValues && watchValues['include_portfolio'] && <div>
                     <label htmlFor="portfolio_links">Portfolio links</label>
                     <input ref={register} type="text" id="portfolio_links" name="portfolio_links" />
                 </div>}
-                { watchValues && watchValues['include_social'] && <div>
+                {watchValues && watchValues['include_social'] && <div>
                     <label htmlFor="social_media_links">Social Media Links</label>
                     <input ref={register} type="text" id="social_media_links" name="social_media_links" />
-                </div>}                
+                </div>}
+
             </section>
             <section>
                 <h4>Uploads</h4>
@@ -114,7 +116,8 @@ function HookJobForm(props) {
             <br /><br />
             <button type="submit" className="btn">Submit Form</button>
         </form>
-    );
+    )
 }
 
-export default HookJobForm;
+
+export default ReactForm;

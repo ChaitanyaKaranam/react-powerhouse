@@ -1,19 +1,14 @@
 import React from 'react';
-import { HTMLForms, ReactForm, HookForm } from '../components/Forms';
+import Form from '../components/Forms/Reusable/Form';
 
 function ReactForms(props) {
     return (
         <div>
             <h1>Forms</h1>
-            {/* <div className="divider"></div>
-            <HTMLForms /> */}
             <br />
             <div className="divider"></div>
-            <ReactForm />
+            <Form/>
             <br/>
-            {/* <div className="divider"></div>
-            <HookForm />
-            <br/> */}
         </div>
     );
 }
