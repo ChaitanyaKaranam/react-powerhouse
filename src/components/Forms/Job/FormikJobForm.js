@@ -6,41 +6,42 @@ function FormikJobForm(props) {
     return (
         <Formik
             initialValues={{
-                firstname: '',
-                lastname: '',
-                email: '',
-                phone: '',
-                location: '',
-                current_employer: '',
-                current_role: '',
-                role_description: '',
-                experience: 0,
-                skills: '',
-                portfolio_links: '',
-                social_media_links: ''
+                'firstname': '',
+                'lastname': '',
+                'email': '',
+                'phone': '',
+                'location': '',
+                'current_employer': '',
+                'current_role': '',
+                'role_description': '',
+                'experience': 0,
+                'skills': '',
+                'include_portfolio': false,
+                'include_social': false
             }}
+            onSubmit={values => console.log(values)}
             validate={values => {
-                let errors = {};
-                if (values.firstname && values.firstname === 'Admin') {
-                    errors.firstname = 'You cannot use this'
+                let error = {};
+                if (values.firstname === 'Admin') {
+                    error['firstname'] = 'You cannot use this';
                 }
-                return errors;
+                return error;
             }}
-            onSubmit={(values) => console.log(values)}>
-            {({ values, handleChange }) => (
+        >
+            {({values}) => (
                 <Form>
-                    {console.log('render')}
+                    { console.log('render') }
                     <section>
                         <h4>Personal Information</h4>
                         <br />
                         <div>
                             <label htmlFor="firstname">First Name</label>
-                            <Field required type="text" id="firstname" name="firstname"/>
+                            <Field required type="text" id="firstname" name="firstname" />
                             <ErrorMessage name="firstname" component="span" />
                         </div>
                         <div>
                             <label htmlFor="lastname">Last Name</label>
-                            <Field type="text" id="lastname" name="lastname" />
+                            <Field required type="text" id="lastname" name="lastname" />
                         </div>
                         <div>
                             <label htmlFor="email">Email Address</label>
@@ -72,7 +73,7 @@ function FormikJobForm(props) {
                         </div>
                         <div>
                             <label htmlFor="experience">Total Years of Experience</label>
-                            <Field type="number" id="experience" name="experience" />
+                            <Field type="text" id="experience" name="experience" />
                         </div>
                         <div>
                             <label htmlFor="skills">Skills</label>
@@ -112,7 +113,8 @@ function FormikJobForm(props) {
                         { values['include_social'] && <div>
                             <label htmlFor="social_media_links">Social Media Links</label>
                             <Field type="text" id="social_media_links" name="social_media_links" />
-                        </div>}                        
+                        </div>}
+                        
                     </section>
                     <section>
                         <h4>Uploads</h4>
@@ -134,7 +136,7 @@ function FormikJobForm(props) {
                 </Form>
             )}
         </Formik>
-    );
+    )
 }
 
 export default FormikJobForm;

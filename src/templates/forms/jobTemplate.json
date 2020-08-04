@@ -1,0 +1,137 @@
+{
+    "title": "Job Application Form",
+    "description": "Form for applying Job",
+    "sections": [
+        {
+            "title": "Personal Information",
+            "id": "personal_information",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "firstname",
+                    "id": "firstname",
+                    "title": "First Name",
+                    "validationProps": {
+                        "required": "This is a mandatory field"
+                    }
+                },
+                {
+                    "type": "text",
+                    "name": "lastname",
+                    "id": "lastname",
+                    "title": "Last Name"
+                },
+                {
+                    "type": "email",
+                    "name": "email",
+                    "id": "email",
+                    "title": "Email Address"
+                },
+                {
+                    "type": "tel",
+                    "name": "phone_number",
+                    "id": "phone",
+                    "title": "Phone Number"
+                },
+                {
+                    "type": "text",
+                    "name": "location",
+                    "id": "location",
+                    "title": "Location"
+                }
+            ]
+        },
+        {
+            "title": "Work Information",
+            "id": "work_information",
+            "fields": [
+                {
+                    "type": "text",
+                    "name": "current_employer",
+                    "id": "current_employer",
+                    "title": "Current Employer"
+                },
+                {
+                    "type": "text",
+                    "name": "current_role",
+                    "id": "current_role",
+                    "title": "Current Role"
+                },
+                {
+                    "type": "text",
+                    "name": "role_description",
+                    "id": "role_description",
+                    "title": "Role Description"
+                },
+                {
+                    "type": "number",
+                    "name": "experience",
+                    "id": "experience",
+                    "title": "Total Years of Experience"
+                }
+            ]
+        },
+        {
+            "title": "Social Media Links",
+            "id": "social_media_links",
+            "fields": [
+                {
+                    "type": "checkbox",
+                    "name": "include_portfolio",
+                    "id": "include_portfolio",
+                    "title": "Include Portfolio Links"
+                },
+                {
+                    "type": "checkbox",
+                    "name": "include_social",
+                    "id": "include_social",
+                    "title": "Include Social Media Links"
+                },
+                {
+                    "type": "url",
+                    "name": "portfolio_url",
+                    "id": "portfolio_url",
+                    "title": "Portfolio Link",
+                    "validationProps": {
+                        "required":"This is a mandatory field"
+                    },
+                    "dynamic": {
+                        "field": "include_portfolio",
+                        "value": true
+                    }
+                },
+                {
+                    "type": "url",
+                    "name": "social_url",
+                    "id": "social_url",
+                    "title": "Social Media Link",
+                    "validationProps": {
+                        "required":"This is a mandatory field"
+                    },
+                    "dynamic": {
+                        "field": "include_social",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "title": "Uploads",
+            "id": "uploads",
+            "fields":[
+                {
+                    "type": "file",
+                    "name": "select_resume",
+                    "id": "select_resume",
+                    "title": "Select Resume"
+                },
+                {
+                    "type": "file",
+                    "name": "select_cover",
+                    "id": "select_cover",
+                    "title": "Select Cover"
+                }
+            ]
+        }
+    ]
+}
