@@ -1,129 +1,79 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-function Form({ template, onSubmit, onError, watchFields=[], watchValues }) {
+// Reusable Form Component
+function Form({ template, onSubmit, watchFields, validate }) {
 
-    let { register, handleSubmit, errors, setError, clearErrors, watch, getValues } = useForm();
+    let { register, handleSubmit, errors, watch, setError, clearErrors } = useForm();
+    let { title, fields } = template;
 
-    if (!template) {
-        return <span className="red-text">Need to pass template prop</span>
-    }
-
-    let { title, sections } = template;
-
-    let wv = watch(watchFields);
-
-    watchValues(wv, { setError, clearErrors, errors });
-
-    const getField = (field) => {
-
-        let { title, type, name, id, validationProps, dynamic } = field;
-
-        let showField = dynamic ? getValues(dynamic['field']) === dynamic['value'] : true;
-
-        if(!showField) return;
-
-        switch (type) {
-            case 'text':
-                return (
-                    <div key={id}>
-                        <label htmlFor={id}>{title}</label>
-                        <input ref={register(validationProps)} type="text" name={name} id={id} />
-                        {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                    </div>
-                )
-            case 'tel':
-                return (
-                    <div key={id}>
-                        <label htmlFor={id}>{title}</label>
-                        <input ref={register(validationProps)} type="tel" name={name} id={id} />
-                        {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                    </div>
-                )
-            case 'number':
-                return (
-                    <div key={id}>
-                        <label htmlFor={id}>{title}</label>
-                        <input ref={register(validationProps)} type="number" name={name} id={id} />
-                        {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                    </div>
-                )
-            case 'email':
-                return (
-                    <div key={id}>
-                        <label htmlFor={id}>{title}</label>
-                        <input ref={register(validationProps)} type="email" name={name} id={id} />
-                        {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                    </div>
-                )
-            case 'url':
-                return (
-                    <div key={id}>
-                        <label htmlFor={id}>{title}</label>
-                        <input ref={register(validationProps)} type="url" name={name} id={id} />
-                        {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                    </div>
-                )
-            case 'file':
-                return (
-                    <React.Fragment key={id}>
-                        <div>
-                            <label htmlFor={id}>{title}</label>
-                            <br/>
-                            <input ref={register(validationProps)} type="file" name={name} id={id} />
-                            {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                        </div>
-                        <br/>
-                    </React.Fragment>
-                )
-            case 'checkbox':
-                return (
-                    <div key={id}>
-                        <label>
-                            <input className="filled-in" ref={register(validationProps)} type="checkbox" name={name} id={id} />
-                            <span>{title}</span>
-                        </label>
-                        {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
-                    </div>
-                )
-            default:
-                return <span key="invalid" className="red-text">Invalid field detected</span>
-        }
-    }
+    let watchValues = watch(watchFields);
+    validate(watchValues, { errors, setError, clearErrors });
 
     const renderFields = (fields) => {
-        if (fields && Array.isArray(fields)) {
-            return fields.map(field => getField(field))
-        } else {
-            return <span className="red-text">Invalid Sections in template</span>
-        }
-    }
+        return fields.map(field => {
+            let { title, type, name, validationProps, dynamic } = field;
 
-    const renderSections = (sections) => {
-        if (sections && Array.isArray(sections)) {
-            return sections.map(({ title, id, fields }) => {
-                return (
-                    <section key={id}>
-                        <h5>{title}</h5>
-                        <br />
-                        {renderFields(fields)}
-                    </section>
-                )
-            })
-        } else {
-            return <span className="red-text">Invalid Sections in template</span>
-        }
+            let showField = dynamic ? watchValues[dynamic['field']] === dynamic['value'] : true;
+
+            if(!showField) return;
+
+            switch (type) {
+                case 'text':
+                    return (
+                        <div key={name}>
+                            <label htmlFor={name}>{title}</label>
+                            <input type="text" name={name} id={name} ref={register(validationProps)} />
+                            {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
+                        </div>
+                    )
+                case 'email':
+                    return (
+                        <div key={name}>
+                            <label htmlFor={name}>{title}</label>
+                            <input type="email" name={name} id={name} ref={register(validationProps)} />
+                            {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
+                        </div>
+                    )
+                case 'checkbox':
+                    return (
+                        <div key={name}>
+                            <label>
+                                <input type="checkbox" name={name} id={name} ref={register(validationProps)} />
+                                <span>{title}</span>
+                                {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
+                            </label>
+                        </div>
+                    )
+                case 'url':
+                    return (
+                        <div key={name}>
+                            <label htmlFor={name}>{title}</label>
+                            <input type="url" name={name} id={name} ref={register(validationProps)} />
+                            {errors[name] && <span className="red-text">{errors[name]['message']}</span>}
+                        </div>
+                    )
+                default:
+                    return (
+                        <div key={name}>
+                            <span className="red-text">Invalid Field</span>
+                        </div>
+                    )
+            }
+
+
+        })
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <h4>{title}</h4>
-            <div className="divider"></div>
-            <br />
-            {renderSections(sections)}
-            <br/>
-            <button type="submit" className="btn" onClick={() => onError(errors)}>Submit Form</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <h4>{title}</h4>
+                {renderFields(fields)}
+                <br />
+                <button type="submit" className="btn">Submit</button>
+            </form>
+        </div>
     );
 }
 

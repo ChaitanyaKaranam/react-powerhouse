@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactForms from './pages/ReactForms';
+import JobForm from './pages/JobForm';
 
 function App() {
   return (
     <div className="App">
       <div className="container">
-        <ReactForms/>
+        <JobForm/>
       </div>
     </div>
   );
