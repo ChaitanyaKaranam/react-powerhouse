@@ -16,7 +16,7 @@ function Form({ template, onSubmit, watchFields, validate }) {
 
             let showField = dynamic ? watchValues[dynamic['field']] === dynamic['value'] : true;
 
-            if(!showField) return;
+            if(!showField) return null;
 
             switch (type) {
                 case 'text':
