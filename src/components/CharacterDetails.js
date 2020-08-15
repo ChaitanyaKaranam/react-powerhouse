@@ -35,7 +35,7 @@ function CharacterDetails(props) {
             <hr />
             <div className="charDetails">
                 <div>
-                    <img alt={charDetails['name']} src={charDetails['image']} width={215} />
+                    <img alt={charDetails['name']} src={charDetails['image']} />
                 </div>
                 <div>
                     <ul className="collection">

@@ -9,8 +9,8 @@ function Character({ character }) {
 
     return (
         <div className="character card black" onClick={() => history.push(`${location.pathname}/${id}`)}>
-            <div className="card-image">
-                <img alt={name} src={image} />
+            <div>
+                <img alt={name} src={image}/>
             </div>
             <div className="card-content">
                 <strong className="green-text">{name}</strong>

@@ -11,7 +11,7 @@ function Location({ location }) {
     return (
         <div className="card black location" onClick={() => {history.push(`${pathname}/${id}`)}}>
             <div className="card-content">
-                <strong className="green-text">{name}</strong>
+                <h4 className="green-text">{name}</h4>
                 <br/>
                 <ul className="collection">
                     <li className="collection-item"><strong>Dimension: </strong>{dimension}</li>

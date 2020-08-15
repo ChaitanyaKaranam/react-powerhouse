@@ -34,7 +34,7 @@ function Locations(props) {
             <div className="row">
                 { locations.map(location => {
                     return(
-                        <div key={location.id} className="col s4">
+                        <div key={location.id} className="col s12 m6 l4">
                             <Location location={location}/>
                         </div>
                     )

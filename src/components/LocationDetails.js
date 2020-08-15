@@ -49,8 +49,8 @@ function LocationDetails(props) {
         } else {
             return characters.map(character => {
                 return (
-                    <div className="col s1 avatar" key={character.id} onClick={() => history.push(`/characters/${character.id}`)}>
-                        <img alt={character.name} title={character.name} src={character.image} className="circle" width="50" />
+                    <div className="col l2 avatar" key={character.id} onClick={() => history.push(`/characters/${character.id}`)}>
+                        <img alt={character.name} title={character.name} src={character.image} className="circle"/>
                     </div>
                 )
             })

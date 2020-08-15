@@ -8,20 +8,35 @@ nav > ul > li > a{
     color: black;
 }
 
+.characters__container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+}
+
 .character{
-    height: 270px;
     cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.character > div > img{
+    max-width:100%;
+    max-height:100%;
 }
 
 .charDetails{
     display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-gap: 2rem;
+    grid-template-columns: auto 2fr;
+    grid-gap: 1rem;
     align-items: center;
 }
 
+.charDetails > div > ul > li{
+    padding: 1.2rem !important;
+}
+
 .location{
-    height: 250px;
+    height: 320px;
     cursor: pointer;
 }
 
@@ -32,4 +47,25 @@ nav > ul > li > a{
 .home{
     display: grid;
     place-items: center;
+}
+
+.card-content > h4{
+    height: 50px;
+}
+
+.avatar > img{
+    width: 150px;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 1000px){
+    .charDetails{
+        grid-template-columns: 1fr;
+    }
+    .charDetails > div > img{
+        width: 100%;
+    }
+    .avatar > img{
+        width: 70px;
+    }
 }

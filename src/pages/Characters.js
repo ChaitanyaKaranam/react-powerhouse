@@ -28,7 +28,7 @@ function Characters(props) {
             <div className="row">
                 {characters.map(character => {
                     return (
-                        <div className="col s3" key={character.id}>
+                        <div className="col l3 m4 s6" key={character.id}>
                             <Character character={character} pathname={props.location.pathname}/>
                         </div>
                     )
