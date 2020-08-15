@@ -1,0 +1,35 @@
+nav > ul > li > a{
+    background-color: black;
+    color: white;
+}
+
+.active{
+    background-color: yellow;
+    color: black;
+}
+
+.character{
+    height: 270px;
+    cursor: pointer;
+}
+
+.charDetails{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 2rem;
+    align-items: center;
+}
+
+.location{
+    height: 250px;
+    cursor: pointer;
+}
+
+.avatar{
+    cursor: pointer;
+}
+
+.home{
+    display: grid;
+    place-items: center;
+}
