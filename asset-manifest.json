@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ChaitanyaKaranam/react-powerhouse/static/css/main.24a9d934.chunk.css",
+    "main.js": "/ChaitanyaKaranam/react-powerhouse/static/js/main.6fe9c182.chunk.js",
+    "main.js.map": "/ChaitanyaKaranam/react-powerhouse/static/js/main.6fe9c182.chunk.js.map",
+    "runtime-main.js": "/ChaitanyaKaranam/react-powerhouse/static/js/runtime-main.14d33b66.js",
+    "runtime-main.js.map": "/ChaitanyaKaranam/react-powerhouse/static/js/runtime-main.14d33b66.js.map",
+    "static/js/2.c6a7b53d.chunk.js": "/ChaitanyaKaranam/react-powerhouse/static/js/2.c6a7b53d.chunk.js",
+    "static/js/2.c6a7b53d.chunk.js.map": "/ChaitanyaKaranam/react-powerhouse/static/js/2.c6a7b53d.chunk.js.map",
+    "index.html": "/ChaitanyaKaranam/react-powerhouse/index.html",
+    "precache-manifest.fc311ff337e9a1344622bd446509989d.js": "/ChaitanyaKaranam/react-powerhouse/precache-manifest.fc311ff337e9a1344622bd446509989d.js",
+    "service-worker.js": "/ChaitanyaKaranam/react-powerhouse/service-worker.js",
+    "static/css/main.24a9d934.chunk.css.map": "/ChaitanyaKaranam/react-powerhouse/static/css/main.24a9d934.chunk.css.map",
+    "static/js/2.c6a7b53d.chunk.js.LICENSE.txt": "/ChaitanyaKaranam/react-powerhouse/static/js/2.c6a7b53d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.14d33b66.js",
+    "static/js/2.c6a7b53d.chunk.js",
+    "static/css/main.24a9d934.chunk.css",
+    "static/js/main.6fe9c182.chunk.js"
+  ]
+}
