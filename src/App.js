@@ -30,7 +30,9 @@ function Home() {
   return (
     <div className="container home">
       <h1>Rick and Morty Router</h1>
-      <img alt="Rick and Morty" src="https://upload.wikimedia.org/wikipedia/en/3/32/Rick_and_Morty_opening_credits.jpeg"/>
+      <div className="poster">
+        <img alt="Rick and Morty" src="https://i.guim.co.uk/img/media/b563ac5db4b4a4e1197c586bbca3edebca9173cd/0_12_3307_1985/master/3307.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=61a26bf43da26e4ca97e932e5ee113f7"/>
+      </div>
     </div>
   )
 }
