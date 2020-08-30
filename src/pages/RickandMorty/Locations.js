@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { LOCATIONS_API } from '../api/rickmorty';
-import Loading from '../components/Loading';
-import Location from '../components/Location';
+import { LOCATION_API } from '../../api/rickandmorty';
+import Loading from '../../components/Loading';
+import Location from '../../components/Location';
 
 function Locations(props) {
 
     let [locations, setLocations] = useState(null);
 
     useEffect(() => {
-        try{
-            fetch(LOCATIONS_API)
+        try {
+            fetch(LOCATION_API)
                 .then(res => res.json())
-                .then(res => {
-                    console.log(res);
-                    if(res.results && Array.isArray(res.results)){
-                        setLocations(res.results)
-                    }
-                })
+                .then(res => res && res.results && Array.isArray(res.results) && setLocations(res.results))
                 .catch(err => console.log(err))
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
     }, [])
@@ -34,13 +29,12 @@ function Locations(props) {
             <div className="row">
                 { locations.map(location => {
                     return(
-                        <div key={location.id} className="col s12 m6 l4">
+                        <div className="col s12 m6 l4" key={location.id}>
                             <Location location={location}/>
                         </div>
                     )
                 })}
             </div>
-            
         </div>
     );
 }

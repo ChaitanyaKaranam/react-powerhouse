@@ -1,15 +1,14 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 function Location({ location }) {
 
-    let { name, id, dimension, type, residents } = location;
+    let { name, dimension, residents, type, id } = location;
     let history = useHistory();
-    let { pathname } = useLocation();
-
+    let { url } = useRouteMatch();
 
     return (
-        <div className="card black location" onClick={() => {history.push(`${pathname}/${id}`)}}>
+        <div className="card black location" onClick={() => history.push(`${url}/${id}`)}>
             <div className="card-content">
                 <h4 className="green-text">{name}</h4>
                 <br/>
